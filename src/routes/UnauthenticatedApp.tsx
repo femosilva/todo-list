@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom'
-import { Login } from 'pages'
+import { Home } from 'pages'
 
 const UnauthenticatedApp = () => {
   return (
     <Routes>
-      <Route path='/login' element={<Login />} />
+      <Route path='/' element={<Home />} />
     </Routes>
   )
 }
