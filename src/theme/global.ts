@@ -7,19 +7,14 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     outline: none;
   }
-  // html {
-  //   @media (max-width: 1080px) {
-  //     font-size: 93.75%
-  //   }
-  //   @media (max-width: 720px) {
-  //     font-size: 87.5%
-  //   }
-  // }
   button, a {
     cursor: pointer;
     &:disabled{
       cursor: not-allowed;
     }
+  }
+  body, button, input, textarea { 
+    font-family: 'Open Sans', sans-serif;
   }
   body { 
     -webkit-font-smoothing: antialase;
