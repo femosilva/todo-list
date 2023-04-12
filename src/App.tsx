@@ -1,5 +1,6 @@
 import { Header } from 'components'
 import Routes from 'routes'
+import './theme/global.css'
 
 import { ThemeProvider } from 'styled-components'
 import { theme, GlobalStyles } from 'theme'
