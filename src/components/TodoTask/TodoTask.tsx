@@ -1,19 +1,23 @@
 import { Fragment } from 'react'
+import { z } from 'zod'
+
 import { Column, Row, Text } from 'components'
+import { createTodoSchema } from 'utils/schemas'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
 
-const TodoTask = () => {
+type Todo = z.infer<typeof createTodoSchema>
+const TodoTask = ({ title, description }: Todo) => {
   return (
     <Fragment>
       <Column backgroundColor='#E0FFFF	' p='1.5rem' maxWidth='450px' borderRadius='0.5rem'>
         <Row justifyContent='space-between'>
-          <Text variant='medium'>Nome da tarefa</Text>
+          <Text variant='medium'>{title}</Text>
           <FontAwesomeIcon icon={faEllipsis} />
         </Row>
         <Text variant='regular' my='16px'>
-          Lorem ipsum is placeholder text commonly used in the graphic,print, and publishing industries for previewing
-          layouts and visual mockups.
+          {description}
         </Text>
         <Row justifyContent='space-between'>
           <Text variant='small'>tags</Text>
