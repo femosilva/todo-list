@@ -1,11 +1,12 @@
-import { Fragment, useState } from 'react'
+import { FormEvent, Fragment, useState } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { createTodoSchema } from 'utils/schemas'
 
 import { Column, Modal, Row, Text } from 'components'
 import { Form } from 'components/Form'
+import { useTodo } from 'hooks/useTodo'
+import { createTodoSchema } from 'utils/schemas'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +15,7 @@ type CreateTodoData = z.infer<typeof createTodoSchema>
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const { add } = useTodo()
   const handleOpenModal = () => {
     setIsModalOpen(true)
   }
@@ -26,7 +28,9 @@ const Header = () => {
   })
   const { handleSubmit } = createTodoForm
   const createTodo = (data: CreateTodoData) => {
-    console.log(data)
+    add(data)
+    localStorage.setItem('todos', JSON.stringify(data))
+    setIsModalOpen(false)
   }
   return (
     <Fragment>

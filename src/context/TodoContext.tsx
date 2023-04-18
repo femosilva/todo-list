@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useState } from 'react'
+import React, { PropsWithChildren, createContext, useState } from 'react'
 import { z } from 'zod'
 
 import { createTodoSchema } from 'utils/schemas'
@@ -6,6 +6,8 @@ import { createTodoSchema } from 'utils/schemas'
 type Todo = z.infer<typeof createTodoSchema>
 type TodoContextType = {
   todos: Todo[]
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
+  add: (todo: Todo) => void
 }
 
 const TodoContext = createContext({} as TodoContextType)
@@ -27,6 +29,7 @@ const TodoProvider = ({ children }: PropsWithChildren) => {
   }
   const contextValue = {
     todos,
+    setTodos,
     add,
     remove,
     done
