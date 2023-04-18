@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { PropsWithChildren, createContext, useState } from 'react'
 import { z } from 'zod'
 
 import { createTodoSchema } from 'utils/schemas'
@@ -10,7 +10,7 @@ type TodoContextType = {
 
 const TodoContext = createContext({} as TodoContextType)
 
-const TodoProvider = ({ children }: any) => {
+const TodoProvider = ({ children }: PropsWithChildren) => {
   const [todos, setTodos] = useState<Todo[]>([])
   const add = ({ title, description }: Todo) => {
     const todo = {
