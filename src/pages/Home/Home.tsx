@@ -6,8 +6,8 @@ const Home = () => {
   const { todos, setTodos } = useTodo()
   useEffect(() => {
     const storedTodosData = localStorage.getItem('todos')
-    if (storedTodosData !== null) {
-      setTodos([JSON.parse(storedTodosData)])
+    if (storedTodosData && storedTodosData !== null) {
+      setTodos(JSON.parse(storedTodosData))
     }
   }, [])
   return (

@@ -1,4 +1,4 @@
-import { FormEvent, Fragment, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,6 +16,7 @@ type CreateTodoData = z.infer<typeof createTodoSchema>
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { add } = useTodo()
+
   const handleOpenModal = () => {
     setIsModalOpen(true)
   }
@@ -27,9 +28,11 @@ const Header = () => {
     resolver: zodResolver(createTodoSchema)
   })
   const { handleSubmit } = createTodoForm
-  const createTodo = (data: CreateTodoData) => {
-    add(data)
-    localStorage.setItem('todos', JSON.stringify(data))
+  const createTodo = (newTodo: CreateTodoData) => {
+    const storedTodosData = localStorage.getItem('todos')
+    const todos = storedTodosData ? JSON.parse(storedTodosData) : []
+    add(newTodo)
+    localStorage.setItem('todos', JSON.stringify([...todos, newTodo]))
     setIsModalOpen(false)
   }
   return (
