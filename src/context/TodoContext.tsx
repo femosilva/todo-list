@@ -10,6 +10,7 @@ type TodoProviderProps = { children: React.ReactNode }
 type TodoContextType = {
   todos: Todo[]
   add: (todo: Omit<Todo, 'id'>) => void
+  edit: (id: string, newTitle: string, newDescription: string) => void
   remove: (id: string) => void
   done: (id: string) => void
 }
@@ -39,6 +40,20 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
     }
     setTodos(prevTodos => [...prevTodos, newTodo])
   }
+  const edit = (id: string, newTitle: string, newDescription: string) => {
+    setTodos(prevTodos =>
+      prevTodos.map(todo => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            title: newTitle,
+            description: newDescription
+          }
+        }
+        return todo
+      })
+    )
+  }
   const remove = (id: string) => {
     setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id))
   }
@@ -48,6 +63,7 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
   const contextValue = {
     todos,
     add,
+    edit,
     remove,
     done
   }
