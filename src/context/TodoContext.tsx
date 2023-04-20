@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { z } from 'zod'
 
@@ -11,6 +11,7 @@ type TodoContextType = {
   todos: Todo[]
   add: (todo: Omit<Todo, 'id'>) => void
   remove: (id: string) => void
+  done: (id: string) => void
 }
 
 const TodoContext = createContext({} as TodoContextType)
@@ -52,5 +53,11 @@ const TodoProvider = ({ children }: TodoProviderProps) => {
   }
   return <TodoContext.Provider value={contextValue}>{children}</TodoContext.Provider>
 }
-
-export { TodoContext, TodoProvider }
+const useTodos = () => {
+  const context = useContext(TodoContext)
+  if (!context) {
+    throw new Error('useTodos must be used within a TodoProvider')
+  }
+  return context
+}
+export { useTodos, TodoProvider }

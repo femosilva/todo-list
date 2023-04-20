@@ -1,9 +1,9 @@
 import { Fragment } from 'react'
 import { Column, TodoTask } from 'components'
-import { useTodo } from 'hooks/useTodo'
+import { useTodos } from 'context/TodoContext'
 
 const Home = () => {
-  const { todos } = useTodo()
+  const { todos } = useTodos()
 
   return (
     <Fragment>

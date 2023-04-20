@@ -6,12 +6,12 @@ import { createTodoSchema } from 'utils/schemas'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
-import { useTodo } from 'hooks/useTodo'
+import { useTodos } from 'context/TodoContext'
 
 type Todo = z.infer<typeof createTodoSchema>
 
-const TodoTask = ({ id, title, description }: Todo) => {
-  const { remove } = useTodo()
+const TodoTask = ({ id, title, description, completed }: Todo) => {
+  const { remove, done } = useTodos()
 
   return (
     <Fragment>
@@ -25,7 +25,7 @@ const TodoTask = ({ id, title, description }: Todo) => {
         </Text>
         <Row justifyContent='space-between'>
           <Text variant='small'>tags</Text>
-          <Text variant='small'>Done</Text>
+          <button onClick={() => done(id)}>{completed ? 'Mark as incomplete' : 'Mark as complete'}</button>
         </Row>
       </Column>
     </Fragment>

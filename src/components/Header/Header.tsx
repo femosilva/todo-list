@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Column, Modal, Row, Text } from 'components'
 import { Form } from 'components/Form'
-import { useTodo } from 'hooks/useTodo'
+import { useTodos } from 'context/TodoContext'
 import { createTodoSchema } from 'utils/schemas'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,7 +15,7 @@ type CreateTodoData = z.infer<typeof createTodoSchema>
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { add } = useTodo()
+  const { add } = useTodos()
 
   const handleOpenModal = () => {
     setIsModalOpen(true)
