@@ -1,21 +1,16 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment } from 'react'
 import { Column, TodoTask } from 'components'
 import { useTodo } from 'hooks/useTodo'
 
 const Home = () => {
-  const { todos, setTodos } = useTodo()
-  useEffect(() => {
-    const storedTodosData = localStorage.getItem('todos')
-    if (storedTodosData && storedTodosData !== null) {
-      setTodos(JSON.parse(storedTodosData))
-    }
-  }, [])
+  const { todos } = useTodo()
+
   return (
     <Fragment>
       <Column>
-        {todos?.map((todo, index) => (
-          <Fragment key={index}>
-            <TodoTask title={todo.title} description={todo.description} />
+        {todos?.map(todo => (
+          <Fragment key={todo.id}>
+            <TodoTask id={todo.id} title={todo.title} description={todo.description} />
           </Fragment>
         ))}
       </Column>

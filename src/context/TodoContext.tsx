@@ -1,35 +1,51 @@
-import React, { PropsWithChildren, createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { z } from 'zod'
 
 import { createTodoSchema } from 'utils/schemas'
 
-type Todo = z.infer<typeof createTodoSchema>
+type Todo = Omit<z.infer<typeof createTodoSchema>, 'id'>
+type TodoProviderProps = { children: React.ReactNode }
+
 type TodoContextType = {
   todos: Todo[]
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
-  add: (todo: Todo) => void
+  add: (todo: Omit<Todo, 'id'>) => void
+  remove: (id: string) => void
 }
 
 const TodoContext = createContext({} as TodoContextType)
 
-const TodoProvider = ({ children }: PropsWithChildren) => {
+const TodoProvider = ({ children }: TodoProviderProps) => {
   const [todos, setTodos] = useState<Todo[]>([])
-  const add = ({ title, description }: Todo) => {
-    const todo = {
-      title,
-      description
+
+  useEffect(() => {
+    const storedTodosData = localStorage.getItem('todos')
+    if (storedTodosData && storedTodosData !== null) {
+      setTodos(JSON.parse(storedTodosData))
     }
-    setTodos(state => [...state, todo])
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
+
+  const add = ({ title, description }: Omit<Todo, 'id'>) => {
+    const newTodo = {
+      id: uuidv4(),
+      title: title,
+      description: description,
+      completed: false
+    }
+    setTodos(prevTodos => [...prevTodos, newTodo])
   }
-  const remove = () => {
-    return
+  const remove = (id: string) => {
+    setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id))
   }
-  const done = () => {
-    return
+  const done = (id: string) => {
+    setTodos(prevTodos => prevTodos.map(todo => (todo.id === id ? { ...todo, completed: !todo.completed } : todo)))
   }
   const contextValue = {
     todos,
-    setTodos,
     add,
     remove,
     done
