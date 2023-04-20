@@ -8,7 +8,7 @@ import { createTodoSchema } from 'utils/schemas'
 
 type Todo = Omit<z.infer<typeof createTodoSchema>, 'id'>
 interface EditTodoFormProps {
-  id: number
+  id: string
   title: string
   description: string
   onClose: () => void
