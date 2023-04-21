@@ -13,6 +13,7 @@ import {
   LayoutProps,
   TypographyProps,
   ColorProps,
+  TextStyleProps,
   PositionProps
 } from 'styled-system'
 
@@ -24,7 +25,7 @@ interface TextVariants {
   tiny: 'tiny'
 }
 
-interface TextProps extends SpaceProps, LayoutProps, TypographyProps, ColorProps, PositionProps {
+interface TextProps extends SpaceProps, LayoutProps, TypographyProps, ColorProps, TextStyleProps, PositionProps {
   variant?: keyof TextVariants
   children: ReactNode
 }

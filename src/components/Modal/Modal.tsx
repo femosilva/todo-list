@@ -11,11 +11,9 @@ const ModalStyles = {
   content: {
     width: '750px',
     height: '400px',
-    borderRadius: ''
+    borderRadius: '0.5rem'
   },
-  overlay: {
-    borderRadius: '0px'
-  }
+  overlay: {}
 }
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   return (

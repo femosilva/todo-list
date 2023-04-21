@@ -14,20 +14,25 @@ const TodoTask = ({ id, title, description }: Todo) => {
 
   return (
     <Fragment>
-      <Column backgroundColor='#E0FFFF	' p='1.5rem' maxWidth='450px' borderRadius='0.5rem'>
+      <Column backgroundColor='#E0FFFF	' p='1.5rem' maxWidth='450px' borderRadius='0.5rem' my='6px'>
         <Row justifyContent='space-between'>
           <Text variant='medium'>{title}</Text>
           <Row>
-            <FontAwesomeIcon onClick={() => setIsEditing(true)} icon={faPenToSquare} cursor='pointer' />
+            <FontAwesomeIcon
+              onClick={() => setIsEditing(true)}
+              icon={faPenToSquare}
+              cursor='pointer'
+              style={{ marginRight: '12px' }}
+            />
             <FontAwesomeIcon onClick={() => remove(id)} icon={faTrash} cursor='pointer' />
           </Row>
         </Row>
         <Text variant='regular' my='16px'>
           {description}
         </Text>
-        <Row justifyContent='flex-end'>
+        {/* <Row justifyContent='flex-end'>
           <FontAwesomeIcon onClick={() => done(id)} icon={faCheck} cursor='pointer' />
-        </Row>
+        </Row> */}
       </Column>
       {isEditing && (
         <Form.EditTodoForm id={id} title={title} description={description} onClose={() => setIsEditing(false)} />

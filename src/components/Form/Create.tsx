@@ -27,21 +27,22 @@ const CreateTodoForm = ({ open, onClose }: CreateTodoFormProps) => {
   return (
     <Modal isOpen={open} onClose={onClose}>
       <FormProvider {...createTodoForm}>
-        <form onSubmit={handleSubmit(createTodo)} className='flex flex-col gap-4 w-full max-w-xs'>
+        <form onSubmit={handleSubmit(createTodo)}>
           <Column py='1rem' px='2rem'>
             <Row justifyContent='space-between'>
               <button onClick={onClose}>Cancelar</button>
-              <button type='submit'>Adicionar</button>
+              <button className='bg-black p-2 rounded text-white' type='submit'>
+                Adicionar
+              </button>
             </Row>
             <Form.Field>
               <Form.Label htmlFor='title'>Titulo</Form.Label>
-              <Form.Input type='text' name='title' />
+              <Form.Input type='text' name='title' placeholder='adicione um titulo' />
             </Form.Field>
             <Form.Field>
               <Form.Label htmlFor='description'>Descrição</Form.Label>
-              <Form.Input type='text' name='description' />
+              <Form.Input type='text' name='description' placeholder='adicione um descricao' />
             </Form.Field>
-            <Form.Field>TAGS</Form.Field>
           </Column>
         </form>
       </FormProvider>

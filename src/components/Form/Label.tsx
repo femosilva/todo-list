@@ -1,5 +1,5 @@
 import { LabelHTMLAttributes } from 'react'
 
 export const Label = (props: LabelHTMLAttributes<HTMLLabelElement>) => {
-  return <label className='text-sm text-zinc-600 flex items-center justify-between' {...props} />
+  return <label className='mb-2 text-xl font-bold text-black' {...props} />
 }
