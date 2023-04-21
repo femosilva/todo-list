@@ -13,7 +13,12 @@ const ModalStyles = {
     height: '400px',
     borderRadius: '0.5rem'
   },
-  overlay: {}
+  overlay: {
+    backgroundColor: 'none',
+    top: '40%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
+  }
 }
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   return (

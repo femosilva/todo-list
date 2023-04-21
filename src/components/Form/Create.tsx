@@ -23,6 +23,7 @@ const CreateTodoForm = ({ open, onClose }: CreateTodoFormProps) => {
     const todos = storedTodosData ? JSON.parse(storedTodosData) : []
     add(newTodo)
     localStorage.setItem('todos', JSON.stringify([...todos, newTodo]))
+    onClose()
   }
   return (
     <Modal isOpen={open} onClose={onClose}>
@@ -30,8 +31,10 @@ const CreateTodoForm = ({ open, onClose }: CreateTodoFormProps) => {
         <form onSubmit={handleSubmit(createTodo)}>
           <Column py='1rem' px='2rem'>
             <Row justifyContent='space-between'>
-              <button onClick={onClose}>Cancelar</button>
-              <button className='bg-black p-2 rounded text-white' type='submit'>
+              <button className='font-semibold' onClick={onClose}>
+                Cancelar
+              </button>
+              <button className='bg-black p-2 rounded text-white font-semibold' type='submit'>
                 Adicionar
               </button>
             </Row>
