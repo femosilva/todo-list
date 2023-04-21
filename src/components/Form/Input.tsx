@@ -5,7 +5,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string
 }
 
-export function Input(props: InputProps) {
+export const Input = (props: InputProps) => {
   const { register } = useFormContext()
 
   return (

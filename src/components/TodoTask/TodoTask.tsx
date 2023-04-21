@@ -1,15 +1,12 @@
 import { Fragment, useState } from 'react'
-import { z } from 'zod'
 
 import { Column, Row, Text } from 'components'
 import { Form } from 'components/Form'
-import { createTodoSchema } from 'utils/schemas'
+import { useTodos } from 'context/TodoContext'
+import { Todo } from 'shared/types/TodoType'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
-import { useTodos } from 'context/TodoContext'
-
-type Todo = z.infer<typeof createTodoSchema>
 
 const TodoTask = ({ id, title, description }: Todo) => {
   const { remove, done } = useTodos()
